@@ -13,7 +13,7 @@ class Constants {
 
     static let ApiKey = Constants.shared.getAPIBaseURL(key: "APIKEY")
     static let BaseURL = URL(string: Constants.shared.getAPIBaseURL(key: "APIURLEndpoint"))!
-    static let BaseImgURL = URL(string: Constants.shared.getAPIBaseURL(key: "APIIMGURLENDPOINT"))!
+    static let BaseImgURL = Constants.shared.getAPIBaseURL(key: "APIIMGURLENDPOINT")
 
     fileprivate func getAPIBaseURL(key: String) -> String {
         guard let urlStr = (Bundle.main.object(forInfoDictionaryKey: key) as? String)?.trimmingCharacters(in: .whitespaces) else {

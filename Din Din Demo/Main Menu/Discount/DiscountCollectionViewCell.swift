@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import AlamofireImage
 
 class DiscountCollectionViewCell: UICollectionViewCell {
 
@@ -18,8 +20,28 @@ class DiscountCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
     }
 
-    public func configure(discount: UIColor) {
-        self.backgroundColor = discount
+    public func configure(movie: Movie) {
+        let imgUrlStr1 = movie.posterPath ?? ""
+        let url = URL(string: Constants.BaseImgURL + imgUrlStr1)!
+
+        let imageView = UIImageView(frame: self.bounds)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(imageView)
+        imageView.setImage(withURL: url)
+
     }
 
+}
+
+
+extension UIImageView {
+
+    public func setImage(withURL: URL, placeholderImage: UIImage? = nil) {
+        self.af.setImage(withURL: withURL, placeholderImage: placeholderImage)
+    }
+
+    public func setImage(withURLRequest urlRequest: URLRequest,
+                                placeholderImage: UIImage? = nil) {
+        self.af.setImage(withURLRequest: urlRequest, placeholderImage: placeholderImage)
+    }
 }

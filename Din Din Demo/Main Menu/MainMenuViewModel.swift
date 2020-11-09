@@ -46,30 +46,31 @@ extension MainMenuViewModelEvents: MapsToNetworkEvent {
 }
 
 protocol MainMenuType: NetworkingViewModel {
-    var discounts: [UIColor] { get }
+    var movies: BehaviorRelay<[Movie]> { get }
     var events: PublishSubject<MainMenuViewModelEvents> { get  }
     var discountSectionModel: BehaviorRelay<DiscountSectionModel> { get }
 }
 
 class MainMenuViewModel: MainMenuType {
     var events: PublishSubject<MainMenuViewModelEvents> = PublishSubject<MainMenuViewModelEvents>()
-    var discounts: [UIColor]
+    var movies: BehaviorRelay<[Movie]> = BehaviorRelay<[Movie]>(value: [])
+
     public var discountSectionModel = BehaviorRelay(value: DiscountSectionModel(items: []))
     let service = MovieService(provider: MoyaProvider<MovieTarget>())
     let disposeBag = DisposeBag()
 
-    init(discounts: [UIColor]) {
-        self.discounts = discounts
+    init() {
         let discountCellModels = self.getDiscountCellModel()
         self.discountSectionModel.accept(DiscountSectionModel(header: "",
                                                               items: discountCellModels))
+        setupBindMovies()
     }
 
     func getDiscountCellModel() -> [DiscountCellModel] {
         var discountCellModels = [DiscountCellModel]()
 
-        for discount in self.discounts {
-            let discountCellModel = DiscountCellModel(discount: discount)
+        for movie in self.movies.value {
+            let discountCellModel = DiscountCellModel(movie: movie)
             discountCellModels.append(discountCellModel)
         }
         return discountCellModels
@@ -80,5 +81,24 @@ class MainMenuViewModel: MainMenuType {
             .map { MainMenuViewModelEvents.getMoviesByPopularity($0) }
             .bind(to: self.events)
             .disposed(by: disposeBag)
+    }
+
+    private func setupBindMovies() {
+        self.events.subscribe(onNext: { [weak self] (event) in
+            guard let self = self else { return }
+            switch event {
+                case .getMoviesByPopularity(.succeeded(let moviesResult)):
+                    self.movies.accept(moviesResult.results ?? [])
+                default:
+                    break
+            }
+        }).disposed(by: disposeBag)
+
+        self.movies.subscribe(onNext: { [weak self] _ in
+            guard let self = self else { return }
+            let discountCellModels = self.getDiscountCellModel()
+            self.discountSectionModel.accept(DiscountSectionModel(header: "",
+                                                                  items: discountCellModels))
+        }).disposed(by: disposeBag)
     }
 }

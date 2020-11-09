@@ -36,12 +36,12 @@ extension DiscountSectionModel: Equatable {
 }
 
 public struct DiscountCellModel {
-    var discount: UIColor
+    var movie: Movie
 }
 
 extension DiscountCellModel: Equatable {
     public static func == (lhs: DiscountCellModel, rhs: DiscountCellModel) -> Bool {
-        return lhs.discount == rhs.discount
+        return lhs.movie == rhs.movie
     }
 }
 

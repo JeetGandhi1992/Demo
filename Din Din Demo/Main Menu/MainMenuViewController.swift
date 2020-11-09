@@ -13,7 +13,7 @@ import RxDataSources
 class MainMenuViewController: UIViewController, MenuNetworkingViewController {
 
     var alertPresenter: AlertPresenterType = AlertPresenter()
-    var loadingSpinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+    var loadingSpinner: UIActivityIndicatorView = UIActivityIndicatorView(style: .gray)
     var viewModel: MainMenuViewModel!
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -26,7 +26,6 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
         case collapsed
     }
 
-    let colours: [UIColor] = [.systemRed, .systemYellow, .systemTeal, .systemBlue, .systemPink]
     let disposeBag = DisposeBag()
 
     var dataSource: RxCollectionViewSectionedReloadDataSource<DiscountSectionModel>?
@@ -48,20 +47,17 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.contentInsetAdjustmentBehavior = .never
         self.setupLoadingSpinner()
-
-        viewModel = MainMenuViewModel(discounts: [.systemRed, .systemYellow, .systemTeal, .systemBlue, .systemPink])
-        
+        viewModel = MainMenuViewModel()
         setupNetworkingEventsUI()
         setupMenuCard()
-        viewModel.getMoviesByPopularity()
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupCollectionView()
-        self.pageControl.numberOfPages = colours.count
+        viewModel.getMoviesByPopularity()
     }
 
     private func setupCollectionView() {
@@ -87,6 +83,15 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
                 self.collectionView.scrollToItem(at: IndexPath(item: self.pageControl.currentPage, section: 0),
                                                  at: .centeredHorizontally,
                                                  animated: true)
+            })
+            .disposed(by: disposeBag)
+
+        self.pageControl.numberOfPages = self.viewModel.movies.value.count
+
+        self.viewModel.discountSectionModel
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.pageControl.numberOfPages = self.viewModel.movies.value.count
             })
             .disposed(by: disposeBag)
     }
@@ -158,7 +163,7 @@ extension MainMenuViewController {
             return UICollectionViewCell()
         }
 
-        cell.configure(discount: discountCellModel.discount)
+        cell.configure(movie: discountCellModel.movie)
         return cell
     }
 }
