@@ -44,10 +44,11 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
     let cardHandleAreaHeight: CGFloat = 250
 
     @IBOutlet weak var menuCardHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var menuTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var discountMenuHeightConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView.contentInsetAdjustmentBehavior = .never
         self.setupLoadingSpinner()
         viewModel = MainMenuViewModel()
         setupNetworkingEventsUI()
@@ -61,8 +62,12 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
     }
 
     private func setupCollectionView() {
-        collectionView
-            .register(DiscountCollectionViewCell.self, forCellWithReuseIdentifier: "\(DiscountCollectionViewCell.self)")
+
+        self.discountMenuHeightConstraint.constant = UIScreen.main.bounds.height - self.cardHandleAreaHeight
+
+        collectionView.register(UINib(nibName: "DiscountCollectionViewCell",
+                                      bundle: .main),
+                                forCellWithReuseIdentifier: "DiscountCollectionViewCell")
 
         collectionView.delegate = self
         collectionView.isPagingEnabled = true
@@ -158,7 +163,7 @@ extension MainMenuViewController {
                                                      indexPath: IndexPath,
                                                      discountCellModel: DiscountCellModel) -> UICollectionViewCell {
         guard let cell = collectionView
-                .dequeueReusableCell(withReuseIdentifier: "\(DiscountCollectionViewCell.self)",
+                .dequeueReusableCell(withReuseIdentifier: "DiscountCollectionViewCell",
                                      for: indexPath) as? DiscountCollectionViewCell else {
             return UICollectionViewCell()
         }
@@ -211,8 +216,10 @@ extension MainMenuViewController {
                 switch state {
                     case .expanded:
                         self.menuCardHeightConstraint.constant = self.menuCardHeight
+                        self.menuTopConstraint.constant = -self.menuCardHeight + self.cardHandleAreaHeight 
                     case .collapsed:
                         self.menuCardHeightConstraint.constant = self.cardHandleAreaHeight
+                        self.menuTopConstraint.constant = 0
                 }
                 self.view.layoutIfNeeded()
             }

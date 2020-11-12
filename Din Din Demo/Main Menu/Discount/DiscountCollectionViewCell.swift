@@ -11,6 +11,8 @@ import AlamofireImage
 
 class DiscountCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var bannerImageView: UIImageView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,13 +24,9 @@ class DiscountCollectionViewCell: UICollectionViewCell {
 
     public func configure(movie: Movie) {
         let imgUrlStr1 = movie.posterPath ?? ""
-        let url = URL(string: Constants.BaseImgURL + imgUrlStr1)!
-
-        let imageView = UIImageView(frame: self.bounds)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(imageView)
-        imageView.setImage(withURL: url)
-
+        if let url = URL(string: Constants.BaseImgURL + imgUrlStr1) {
+            bannerImageView.setImage(withURL: url)
+        }
     }
 
 }
