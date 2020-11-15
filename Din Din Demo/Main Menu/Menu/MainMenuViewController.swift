@@ -28,7 +28,7 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
 
     let disposeBag = DisposeBag()
 
-    var dataSource: RxCollectionViewSectionedReloadDataSource<DiscountSectionModel>?
+    var dataSource: RxCollectionViewSectionedReloadDataSource<MovieSectionModel>?
 
     var cardVisible = false
     var nextState: MenuCardState {
@@ -50,7 +50,6 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupLoadingSpinner()
-        viewModel = MainMenuViewModel()
         setupNetworkingEventsUI()
         setupMenuCard()
     }
@@ -61,9 +60,14 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
         viewModel.getMoviesByPopularity()
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        self.menuContainerView.roundCorners(corners: [.topLeft, .topRight], radius: 30)
+    }
+
     private func setupCollectionView() {
 
-        self.discountMenuHeightConstraint.constant = UIScreen.main.bounds.height - self.cardHandleAreaHeight
+        self.discountMenuHeightConstraint.constant = UIScreen.main.bounds.height - self.cardHandleAreaHeight + 30
 
         collectionView.register(UINib(nibName: "DiscountCollectionViewCell",
                                       bundle: .main),
@@ -76,7 +80,7 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
         let dataSource = discountViewDataSource()
         self.dataSource = dataSource
 
-        viewModel.discountSectionModel
+        viewModel.movieSectionModel
             .map { [$0] }
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
@@ -93,18 +97,22 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
 
         self.pageControl.numberOfPages = self.viewModel.movies.value.count
 
-        self.viewModel.discountSectionModel
+        self.viewModel.movieSectionModel
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.pageControl.numberOfPages = self.viewModel.movies.value.count
             })
             .disposed(by: disposeBag)
+
+        self.collectionView.rx
+            .modelSelected(MovieCellModel.self)
+            .map { $0.movie }
+            .bind(to: self.viewModel.selectedMovie)
+            .disposed(by: disposeBag)
     }
 
     private func setupMenuCard() {
 
-        menuCardViewController = MenuCardViewController(nibName:"MenuCardViewController",
-                                                        bundle:nil)
         self.addChild(menuCardViewController)
         self.menuContainerView.addSubview(menuCardViewController.view)
         menuCardViewController.view.frame = menuContainerView.bounds
@@ -123,11 +131,21 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
 
         let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(MainMenuViewController.handleCardPan(recogniser:)))
 
-        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(MainMenuViewController.handleCardTap(recogniser:)))
-
-        menuCardViewController.view.addGestureRecognizer(tapGestureRecognizer)
-        menuCardViewController.view.addGestureRecognizer(panGestureRecognizer)
-        self.view.addGestureRecognizer(tapGestureRecognizer2)
+        menuCardViewController.handleArea.addGestureRecognizer(tapGestureRecognizer)
+        menuCardViewController.handleArea.addGestureRecognizer(panGestureRecognizer)
+        menuCardViewController.hasReachedAtTop
+            .filter({ [weak self] _ -> Bool in
+                guard let self = self else { return false }
+                return self.nextState == .collapsed
+            })
+            .asDriver(onErrorJustReturn: ())
+            .drive(onNext: { [weak self]_ in
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.animateTransitionIfNeeded(state: self.nextState)
+                }
+            })
+            .disposed(by: menuCardViewController.disposeBag)
     }
 }
 
@@ -152,16 +170,16 @@ extension MainMenuViewController: UIScrollViewDelegate {
 
 extension MainMenuViewController {
 
-    private func discountViewDataSource() -> RxCollectionViewSectionedReloadDataSource<DiscountSectionModel> {
-        return RxCollectionViewSectionedReloadDataSource<DiscountSectionModel>(
+    private func discountViewDataSource() -> RxCollectionViewSectionedReloadDataSource<MovieSectionModel> {
+        return RxCollectionViewSectionedReloadDataSource<MovieSectionModel>(
             configureCell: configureDiscountCollectionViewCell
         )
     }
 
-    private func configureDiscountCollectionViewCell(_: CollectionViewSectionedDataSource<DiscountSectionModel>,
+    private func configureDiscountCollectionViewCell(_: CollectionViewSectionedDataSource<MovieSectionModel>,
                                                      collectionView: UICollectionView,
                                                      indexPath: IndexPath,
-                                                     discountCellModel: DiscountCellModel) -> UICollectionViewCell {
+                                                     discountCellModel: MovieCellModel) -> UICollectionViewCell {
         guard let cell = collectionView
                 .dequeueReusableCell(withReuseIdentifier: "DiscountCollectionViewCell",
                                      for: indexPath) as? DiscountCollectionViewCell else {
@@ -179,14 +197,7 @@ extension MainMenuViewController {
     func handleCardTap(recogniser: UITapGestureRecognizer) {
         switch recogniser.state {
             case .ended:
-                if recogniser.view == self.view {
-                    if nextState == .collapsed {
-                        animateTransitionIfNeeded(state: nextState)
-                    }
-                } else {
-                    animateTransitionIfNeeded(state: nextState)
-                }
-
+                animateTransitionIfNeeded(state: nextState)
             default:
                 break
         }
@@ -209,7 +220,7 @@ extension MainMenuViewController {
         }
     }
 
-    func animateTransitionIfNeeded (state: MenuCardState, duration:TimeInterval = 0.45) {
+    func animateTransitionIfNeeded (state: MenuCardState, duration: TimeInterval = 0.45) {
         if runningAnimations.isEmpty {
             let frameAnimator = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) { [weak self] in
                 guard let self = self else { return }
@@ -221,6 +232,7 @@ extension MainMenuViewController {
                         self.menuCardHeightConstraint.constant = self.cardHandleAreaHeight
                         self.menuTopConstraint.constant = 0
                 }
+                self.menuCardViewController.view.layoutIfNeeded()
                 self.view.layoutIfNeeded()
             }
 

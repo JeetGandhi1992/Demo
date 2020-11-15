@@ -22,26 +22,18 @@ public struct MovieService: MovieServiceType {
     }
 
     public func getMoviesByPopularity(for page: Int) -> Observable<NetworkingUIEvent<MovieResult>> {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return self.provider.rx
-            .request(MovieTarget.getMoviesByPopularity(urlParameters: appendQueryString(page: page)))
-            .map(MovieResult.self, using: decoder, failsOnEmptyData: true)
-            .map({ (result) -> NetworkingUIEvent<MovieResult> in
-                return NetworkingUIEvent.succeeded(result)
-            })
-            .asObservable()
-            .startWith(.waiting)
-            .catchError { (error) -> Observable<NetworkingUIEvent<MovieResult>> in
-                return Observable.just(NetworkingUIEvent.failed(error))
-            }
+        return self.getMovies(by: MovieTarget.getMoviesByPopularity(urlParameters: appendQueryString(page: page)))
     }
 
     public func getMoviesByTopRatings(for page: Int) -> Observable<NetworkingUIEvent<MovieResult>> {
+        return self.getMovies(by: MovieTarget.getMoviesByTopRatings(urlParameters: appendQueryString(page: page)))
+    }
+
+    private func getMovies(by requestType: MovieTarget) -> Observable<NetworkingUIEvent<MovieResult>> {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return self.provider.rx
-            .request(MovieTarget.getMoviesByTopRatings(urlParameters: appendQueryString(page: page)))
+            .request(requestType)
             .map(MovieResult.self, using: decoder, failsOnEmptyData: true)
             .map({ (result) -> NetworkingUIEvent<MovieResult> in
                 return NetworkingUIEvent.succeeded(result)

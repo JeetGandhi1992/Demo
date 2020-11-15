@@ -12,6 +12,7 @@ import RxCocoa
 public protocol MenuViewControllerProtocol {
     associatedtype ViewModelT
     var viewModel: ViewModelT! { get set }
+
 }
 
 public protocol MenuNetworkingViewController: MenuViewControllerProtocol where Self: UIViewController, ViewModelT: NetworkingViewModel {
@@ -72,41 +73,4 @@ extension MenuNetworkingViewController {
                                                        presentingVC: UIViewController.currentRootViewController)
     }
 
-}
-
-extension UIViewController {
-
-
-    public static var currentRootViewController: UIViewController {
-        guard let window = UIApplication.shared.delegate?.window as? UIWindow else {
-            fatalError("Window unavailable")
-        }
-
-        guard let rootViewController = window.rootViewController else {
-            fatalError("root view controller not available")
-        }
-
-        guard let presentedViewController = rootViewController.presentedViewController else {
-            return rootViewController
-        }
-
-        return presentedViewController
-    }
-
-    public static func make<T: MenuViewControllerProtocol>(viewController: T.Type, viewModel: T.ViewModelT) -> T {
-        var vc = make(viewController: viewController)
-        vc.viewModel = viewModel
-        return vc
-    }
-
-    public static func make<T>(viewController: T.Type) -> T {
-        let viewControllerName = String(describing: viewController)
-
-        let storyboard = UIStoryboard(name: "Main", bundle: Bundle(for: viewController as! AnyClass))
-
-        guard let viewController = storyboard.instantiateViewController(withIdentifier: viewControllerName) as? T else {
-            fatalError("Unable to create ViewController: \(viewControllerName) from storyboard: \(storyboard)")
-        }
-        return viewController
-    }
 }

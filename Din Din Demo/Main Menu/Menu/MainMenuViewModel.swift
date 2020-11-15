@@ -48,37 +48,46 @@ extension MainMenuViewModelEvents: MapsToNetworkEvent {
 protocol MainMenuType: NetworkingViewModel {
     var movies: BehaviorRelay<[Movie]> { get }
     var events: PublishSubject<MainMenuViewModelEvents> { get  }
-    var discountSectionModel: BehaviorRelay<DiscountSectionModel> { get }
+    var movieSectionModel: BehaviorRelay<MovieSectionModel> { get }
 }
 
 class MainMenuViewModel: MainMenuType {
     var events: PublishSubject<MainMenuViewModelEvents> = PublishSubject<MainMenuViewModelEvents>()
     var movies: BehaviorRelay<[Movie]> = BehaviorRelay<[Movie]>(value: [])
 
-    public var discountSectionModel = BehaviorRelay(value: DiscountSectionModel(items: []))
-    let service = MovieService(provider: MoyaProvider<MovieTarget>())
+    public var movieSectionModel = BehaviorRelay(value: MovieSectionModel(items: []))
+    let service: MovieService
     let disposeBag = DisposeBag()
+    public let selectedMovie = PublishSubject<Movie>()
 
-    init() {
-        let discountCellModels = self.getDiscountCellModel()
-        self.discountSectionModel.accept(DiscountSectionModel(header: "",
-                                                              items: discountCellModels))
+    init(provider: MoyaProvider<MovieTarget>) {
+        self.service = MovieService(provider: provider)
+        let movieCellModels = self.getMovieCellModel()
+        self.movieSectionModel.accept(MovieSectionModel(header: "",
+                                                              items: movieCellModels))
         setupBindMovies()
     }
 
-    func getDiscountCellModel() -> [DiscountCellModel] {
-        var discountCellModels = [DiscountCellModel]()
+    func getMovieCellModel() -> [MovieCellModel] {
+        var movieCellModels = [MovieCellModel]()
 
         for movie in self.movies.value {
-            let discountCellModel = DiscountCellModel(movie: movie)
-            discountCellModels.append(discountCellModel)
+            let movieCellModel = MovieCellModel(movie: movie)
+            movieCellModels.append(movieCellModel)
         }
-        return discountCellModels
+        return movieCellModels
     }
 
     public func getMoviesByPopularity() {
         service.getMoviesByPopularity(for: 1)
             .map { MainMenuViewModelEvents.getMoviesByPopularity($0) }
+            .bind(to: self.events)
+            .disposed(by: disposeBag)
+    }
+
+    public func getMoviesByRatings() {
+        service.getMoviesByTopRatings(for: 1)
+            .map { MainMenuViewModelEvents.getMoviesByTopRatings($0) }
             .bind(to: self.events)
             .disposed(by: disposeBag)
     }
@@ -96,9 +105,9 @@ class MainMenuViewModel: MainMenuType {
 
         self.movies.subscribe(onNext: { [weak self] _ in
             guard let self = self else { return }
-            let discountCellModels = self.getDiscountCellModel()
-            self.discountSectionModel.accept(DiscountSectionModel(header: "",
-                                                                  items: discountCellModels))
+            let movieCellModels = self.getMovieCellModel()
+            self.movieSectionModel.accept(MovieSectionModel(header: "",
+                                                                  items: movieCellModels))
         }).disposed(by: disposeBag)
     }
 }

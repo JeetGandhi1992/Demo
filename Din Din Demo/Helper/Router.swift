@@ -19,6 +19,15 @@ struct Router: RouterProtocol {
             case let viewModel as MainMenuViewModel:
                 return UIViewController.make(viewController: MainMenuViewController.self, viewModel: viewModel)
 
+            case let viewModel as MenuCardViewModel:
+                return UIViewController.make(viewController: MenuCardViewController.self,
+                                             viewModel: viewModel,
+                                             from: "")
+
+            case let viewModel as MovieDetailViewModel:
+                return UIViewController.make(viewController: MovieDetailViewController.self,
+                                             viewModel: viewModel)
+
             default:
                 fatalError("Unable to find corresponding View Controller for \(viewModel)")
         }

@@ -11,7 +11,7 @@
 		2E1B320FD90AEE1AEFE50DC7 /* Pods_Din_Din_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D6FAD9165E651AC228C52D /* Pods_Din_Din_Demo.framework */; };
 		46567F8E2557E03B0009B79B /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46567F8D2557E03B0009B79B /* MainMenuViewController.swift */; };
 		46567F962557E06F0009B79B /* MainMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46567F952557E06F0009B79B /* MainMenuViewModel.swift */; };
-		46567FC52557E9090009B79B /* DiscountSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46567FC42557E9090009B79B /* DiscountSectionModel.swift */; };
+		46567FC52557E9090009B79B /* MenuSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46567FC42557E9090009B79B /* MenuSectionModel.swift */; };
 		46567FCE2557E9EA0009B79B /* DiscountCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46567FCC2557E9EA0009B79B /* DiscountCollectionViewCell.swift */; };
 		46567FCF2557E9EA0009B79B /* DiscountCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46567FCD2557E9EA0009B79B /* DiscountCollectionViewCell.xib */; };
 		46567FD9255814F80009B79B /* MenuCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46567FD7255814F80009B79B /* MenuCardViewController.swift */; };
@@ -22,6 +22,8 @@
 		4656803A25587D150009B79B /* MovieTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4656803925587D150009B79B /* MovieTarget.swift */; };
 		4656804225587D730009B79B /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4656804025587D730009B79B /* Movie.swift */; };
 		4656804325587D730009B79B /* MovieResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4656804125587D730009B79B /* MovieResult.swift */; };
+		4692E58B255E576400905585 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692E58A255E576400905585 /* UIView+Extensions.swift */; };
+		4692E590255F09EE00905585 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4692E58F255F09EE00905585 /* UIViewController+Extensions.swift */; };
 		46A6D59E2557125600EDD6FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A6D59D2557125600EDD6FC /* AppDelegate.swift */; };
 		46A6D5A52557125600EDD6FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46A6D5A32557125600EDD6FC /* Main.storyboard */; };
 		46A6D5A72557125800EDD6FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46A6D5A62557125800EDD6FC /* Assets.xcassets */; };
@@ -31,6 +33,11 @@
 		46CD8EAB2558AAE100671408 /* MenuNetworkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CD8EAA2558AAE100671408 /* MenuNetworkingViewController.swift */; };
 		46CD8EB02558B08900671408 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CD8EAF2558B08900671408 /* AlertPresenter.swift */; };
 		46CD8EB52558B09A00671408 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CD8EB42558B09A00671408 /* Router.swift */; };
+		46CFD0E4255D37C600136558 /* MainMenuCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CFD0E3255D37C600136558 /* MainMenuCoordinator.swift */; };
+		46CFD116255D389400136558 /* ProviderFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CFD115255D389400136558 /* ProviderFactory.swift */; };
+		46CFD125255D901B00136558 /* MenuCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46CFD124255D901B00136558 /* MenuCardViewModel.swift */; };
+		46DD37462560BF6100CC9FB8 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DD37452560BF6100CC9FB8 /* MovieDetailViewController.swift */; };
+		46DD374B2560BF7D00CC9FB8 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DD374A2560BF7D00CC9FB8 /* MovieDetailViewModel.swift */; };
 		C0EE8B62B7828CE35879A251 /* Pods_Din_Din_DemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0D10851CE98C08A2A2D4654 /* Pods_Din_Din_DemoTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +61,7 @@
 /* Begin PBXFileReference section */
 		46567F8D2557E03B0009B79B /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		46567F952557E06F0009B79B /* MainMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewModel.swift; sourceTree = "<group>"; };
-		46567FC42557E9090009B79B /* DiscountSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountSectionModel.swift; sourceTree = "<group>"; };
+		46567FC42557E9090009B79B /* MenuSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSectionModel.swift; sourceTree = "<group>"; };
 		46567FCC2557E9EA0009B79B /* DiscountCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCollectionViewCell.swift; sourceTree = "<group>"; };
 		46567FCD2557E9EA0009B79B /* DiscountCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscountCollectionViewCell.xib; sourceTree = "<group>"; };
 		46567FD7255814F80009B79B /* MenuCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCardViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +72,8 @@
 		4656803925587D150009B79B /* MovieTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTarget.swift; sourceTree = "<group>"; };
 		4656804025587D730009B79B /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		4656804125587D730009B79B /* MovieResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieResult.swift; sourceTree = "<group>"; };
+		4692E58A255E576400905585 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		4692E58F255F09EE00905585 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		46A6D59A2557125600EDD6FC /* Din Din Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Din Din Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46A6D59D2557125600EDD6FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46A6D5A42557125600EDD6FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -80,6 +89,11 @@
 		46CD8EAA2558AAE100671408 /* MenuNetworkingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNetworkingViewController.swift; sourceTree = "<group>"; };
 		46CD8EAF2558B08900671408 /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		46CD8EB42558B09A00671408 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		46CFD0E3255D37C600136558 /* MainMenuCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuCoordinator.swift; sourceTree = "<group>"; };
+		46CFD115255D389400136558 /* ProviderFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderFactory.swift; sourceTree = "<group>"; };
+		46CFD124255D901B00136558 /* MenuCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCardViewModel.swift; sourceTree = "<group>"; };
+		46DD37452560BF6100CC9FB8 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		46DD374A2560BF7D00CC9FB8 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		4B43B402688B19481624C7F0 /* Pods-Din Din Demo-Din Din DemoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Din Din Demo-Din Din DemoUITests.debug.xcconfig"; path = "Target Support Files/Pods-Din Din Demo-Din Din DemoUITests/Pods-Din Din Demo-Din Din DemoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		68D6FAD9165E651AC228C52D /* Pods_Din_Din_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Din_Din_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		804B3DF8C4061E0208DA0CD5 /* Pods-Din Din Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Din Din Demo.release.xcconfig"; path = "Target Support Files/Pods-Din Din Demo/Pods-Din Din Demo.release.xcconfig"; sourceTree = "<group>"; };
@@ -122,12 +136,13 @@
 		46567F8C2557E0130009B79B /* Main Menu */ = {
 			isa = PBXGroup;
 			children = (
+				46DD37442560BE6900CC9FB8 /* Movie Detail */,
+				46CFD11B255D42A500136558 /* Menu */,
+				46CFD0E2255D377000136558 /* Coordinator */,
 				4656803E25587D500009B79B /* Models */,
 				4656803025587C770009B79B /* Service Wrapper */,
 				46567FD3255803670009B79B /* Menu Card */,
 				46567FC32557E8F70009B79B /* Discount */,
-				46567F8D2557E03B0009B79B /* MainMenuViewController.swift */,
-				46567F952557E06F0009B79B /* MainMenuViewModel.swift */,
 			);
 			path = "Main Menu";
 			sourceTree = "<group>";
@@ -135,7 +150,7 @@
 		46567FC32557E8F70009B79B /* Discount */ = {
 			isa = PBXGroup;
 			children = (
-				46567FC42557E9090009B79B /* DiscountSectionModel.swift */,
+				46567FC42557E9090009B79B /* MenuSectionModel.swift */,
 				46567FCC2557E9EA0009B79B /* DiscountCollectionViewCell.swift */,
 				46567FCD2557E9EA0009B79B /* DiscountCollectionViewCell.xib */,
 			);
@@ -146,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				46567FD7255814F80009B79B /* MenuCardViewController.swift */,
+				46CFD124255D901B00136558 /* MenuCardViewModel.swift */,
 				46567FD8255814F80009B79B /* MenuCardViewController.xib */,
 			);
 			path = "Menu Card";
@@ -159,6 +175,9 @@
 				46CD8EAA2558AAE100671408 /* MenuNetworkingViewController.swift */,
 				46CD8EAF2558B08900671408 /* AlertPresenter.swift */,
 				46CD8EB42558B09A00671408 /* Router.swift */,
+				46CFD115255D389400136558 /* ProviderFactory.swift */,
+				4692E58A255E576400905585 /* UIView+Extensions.swift */,
+				4692E58F255F09EE00905585 /* UIViewController+Extensions.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -241,6 +260,32 @@
 				46A6D5C12557125800EDD6FC /* Info.plist */,
 			);
 			path = "Din Din DemoUITests";
+			sourceTree = "<group>";
+		};
+		46CFD0E2255D377000136558 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				46CFD0E3255D37C600136558 /* MainMenuCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		46CFD11B255D42A500136558 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				46567F8D2557E03B0009B79B /* MainMenuViewController.swift */,
+				46567F952557E06F0009B79B /* MainMenuViewModel.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		46DD37442560BE6900CC9FB8 /* Movie Detail */ = {
+			isa = PBXGroup;
+			children = (
+				46DD37452560BF6100CC9FB8 /* MovieDetailViewController.swift */,
+				46DD374A2560BF7D00CC9FB8 /* MovieDetailViewModel.swift */,
+			);
+			path = "Movie Detail";
 			sourceTree = "<group>";
 		};
 		48FBCF68B4044CCF4868E23B /* Pods */ = {
@@ -508,14 +553,21 @@
 			files = (
 				46567F962557E06F0009B79B /* MainMenuViewModel.swift in Sources */,
 				46CD8EB02558B08900671408 /* AlertPresenter.swift in Sources */,
+				46CFD0E4255D37C600136558 /* MainMenuCoordinator.swift in Sources */,
 				46567F8E2557E03B0009B79B /* MainMenuViewController.swift in Sources */,
-				46567FC52557E9090009B79B /* DiscountSectionModel.swift in Sources */,
+				46DD37462560BF6100CC9FB8 /* MovieDetailViewController.swift in Sources */,
+				46567FC52557E9090009B79B /* MenuSectionModel.swift in Sources */,
+				46DD374B2560BF7D00CC9FB8 /* MovieDetailViewModel.swift in Sources */,
 				46568029255876A60009B79B /* NetworkingViewModel.swift in Sources */,
+				46CFD116255D389400136558 /* ProviderFactory.swift in Sources */,
+				46CFD125255D901B00136558 /* MenuCardViewModel.swift in Sources */,
 				46567FCE2557E9EA0009B79B /* DiscountCollectionViewCell.swift in Sources */,
+				4692E590255F09EE00905585 /* UIViewController+Extensions.swift in Sources */,
 				46567FF8255866CB0009B79B /* Constants.swift in Sources */,
 				46CD8EB52558B09A00671408 /* Router.swift in Sources */,
 				4656803225587C9F0009B79B /* MovieService.swift in Sources */,
 				46CD8EAB2558AAE100671408 /* MenuNetworkingViewController.swift in Sources */,
+				4692E58B255E576400905585 /* UIView+Extensions.swift in Sources */,
 				4656804325587D730009B79B /* MovieResult.swift in Sources */,
 				46A6D59E2557125600EDD6FC /* AppDelegate.swift in Sources */,
 				46567FD9255814F80009B79B /* MenuCardViewController.swift in Sources */,

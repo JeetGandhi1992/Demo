@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuCardViewController" customModule="Din_Din_Demo" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="RPj-Rb-Nf5" id="5wk-6i-O52"/>
                 <outlet property="handleArea" destination="3BT-WG-oHY" id="Zdq-ZG-TmY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -27,13 +28,27 @@
                         <constraint firstAttribute="height" constant="75" id="PBM-gd-u37"/>
                     </constraints>
                 </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="RPj-Rb-Nf5">
+                    <rect key="frame" x="0.0" y="75" width="414" height="821"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="vo9-dv-U2U">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3BT-WG-oHY" secondAttribute="trailing" id="5mY-Zx-uaL"/>
+                <constraint firstItem="RPj-Rb-Nf5" firstAttribute="top" secondItem="3BT-WG-oHY" secondAttribute="bottom" id="HmW-aI-CkM"/>
                 <constraint firstItem="3BT-WG-oHY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Jcy-WI-2QM"/>
+                <constraint firstAttribute="bottom" secondItem="RPj-Rb-Nf5" secondAttribute="bottom" id="R4K-jI-0xL"/>
                 <constraint firstItem="3BT-WG-oHY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="XtZ-qB-UMZ"/>
+                <constraint firstItem="RPj-Rb-Nf5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="r3B-Mu-osZ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RPj-Rb-Nf5" secondAttribute="trailing" id="sY9-L1-Pzg"/>
             </constraints>
             <point key="canvasLocation" x="20" y="66"/>
         </view>
