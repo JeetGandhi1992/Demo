@@ -39,12 +39,12 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
     var animationProgressWhenInterrupted:CGFloat = 0
 
     var menuCardHeight: CGFloat {
-        self.view.frame.height
+        UIScreen.main.bounds.height
     }
     let cardHandleAreaHeight: CGFloat = 250
 
-    @IBOutlet weak var menuCardHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var menuTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var menuCardTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var discountMenuHeightConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
@@ -68,7 +68,7 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
     private func setupCollectionView() {
 
         self.discountMenuHeightConstraint.constant = UIScreen.main.bounds.height - self.cardHandleAreaHeight + 30
-
+        self.menuCardTopConstraint.constant = UIScreen.main.bounds.height - self.cardHandleAreaHeight
         collectionView.register(UINib(nibName: "DiscountCollectionViewCell",
                                       bundle: .main),
                                 forCellWithReuseIdentifier: "DiscountCollectionViewCell")
@@ -226,13 +226,14 @@ extension MainMenuViewController {
                 guard let self = self else { return }
                 switch state {
                     case .expanded:
-                        self.menuCardHeightConstraint.constant = self.menuCardHeight
+                        self.menuCardTopConstraint.constant = 0
                         self.menuTopConstraint.constant = -self.menuCardHeight + self.cardHandleAreaHeight 
                     case .collapsed:
-                        self.menuCardHeightConstraint.constant = self.cardHandleAreaHeight
+                        self.menuCardTopConstraint.constant = UIScreen.main.bounds.height - self.cardHandleAreaHeight
                         self.menuTopConstraint.constant = 0
                 }
                 self.menuCardViewController.view.layoutIfNeeded()
+                self.menuCardViewController.collectionView.layoutSubviews()
                 self.view.layoutIfNeeded()
             }
 

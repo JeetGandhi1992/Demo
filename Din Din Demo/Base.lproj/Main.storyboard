@@ -40,11 +40,8 @@
                                 <color key="currentPageIndicatorTintColor" systemColor="systemGreenColor"/>
                             </pageControl>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wye-gY-JJ4">
-                                <rect key="frame" x="0.0" y="646" width="414" height="250"/>
+                                <rect key="frame" x="0.0" y="646" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="epZ-p7-gIC"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -53,8 +50,9 @@
                             <constraint firstItem="Hlp-hn-9lv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Er4-pF-h13"/>
                             <constraint firstItem="TH3-MR-qwa" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Jkd-uC-TWQ"/>
                             <constraint firstItem="Hlp-hn-9lv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MW1-jS-3d8"/>
+                            <constraint firstAttribute="height" secondItem="wye-gY-JJ4" secondAttribute="height" id="NMZ-gM-irm"/>
                             <constraint firstItem="Hlp-hn-9lv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="PhK-DB-jn1"/>
-                            <constraint firstAttribute="bottom" secondItem="wye-gY-JJ4" secondAttribute="bottom" id="roj-jD-51N"/>
+                            <constraint firstItem="wye-gY-JJ4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="646" id="VKp-W8-QLU"/>
                             <constraint firstItem="wye-gY-JJ4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ruq-Xk-cmX"/>
                             <constraint firstItem="TH3-MR-qwa" firstAttribute="bottom" secondItem="Hlp-hn-9lv" secondAttribute="bottom" constant="-30" id="wt6-kT-Csz"/>
                             <constraint firstItem="wye-gY-JJ4" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="zyj-tb-dte"/>
@@ -63,7 +61,7 @@
                     <connections>
                         <outlet property="collectionView" destination="Hlp-hn-9lv" id="SZW-nZ-WWi"/>
                         <outlet property="discountMenuHeightConstraint" destination="7x5-pN-Mc6" id="8Fm-9f-M4g"/>
-                        <outlet property="menuCardHeightConstraint" destination="epZ-p7-gIC" id="LT0-bY-wia"/>
+                        <outlet property="menuCardTopConstraint" destination="VKp-W8-QLU" id="93i-f2-5ap"/>
                         <outlet property="menuContainerView" destination="wye-gY-JJ4" id="sZ8-TC-OOe"/>
                         <outlet property="menuTopConstraint" destination="Er4-pF-h13" id="9UR-rw-R05"/>
                         <outlet property="pageControl" destination="TH3-MR-qwa" id="9cn-MW-Aor"/>
