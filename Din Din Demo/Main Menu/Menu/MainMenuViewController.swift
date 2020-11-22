@@ -67,16 +67,21 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
 
     private func setupCollectionView() {
 
-        self.discountMenuHeightConstraint.constant = UIScreen.main.bounds.height - self.cardHandleAreaHeight + 30
-        self.menuCardTopConstraint.constant = UIScreen.main.bounds.height - self.cardHandleAreaHeight
+        let screenFrame = UIScreen.main.bounds
+        let screenHeight = screenFrame.height
+        let screenWidth = screenFrame.width
+
+        self.discountMenuHeightConstraint.constant = screenHeight - self.cardHandleAreaHeight + 30
+        self.menuCardTopConstraint.constant = screenHeight - self.cardHandleAreaHeight
         collectionView.register(UINib(nibName: "DiscountCollectionViewCell",
                                       bundle: .main),
                                 forCellWithReuseIdentifier: "DiscountCollectionViewCell")
 
         collectionView.delegate = self
         collectionView.isPagingEnabled = true
-        collectionView.center = CGPoint(x: self.view.frame.width, y: self.view.frame.height/2)
-
+        collectionView.center = CGPoint(x: screenWidth, y: screenHeight/2)
+        collectionView.delaysContentTouches = false
+        
         let dataSource = discountViewDataSource()
         self.dataSource = dataSource
 
@@ -100,7 +105,12 @@ class MainMenuViewController: UIViewController, MenuNetworkingViewController {
         self.viewModel.movieSectionModel
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                self.pageControl.numberOfPages = self.viewModel.movies.value.count
+                DispatchQueue.main.async { [weak self] in
+                    guard let self = self else { return }
+                    self.pageControl.numberOfPages = self.viewModel.movies.value.count
+                    self.view.layoutIfNeeded()
+                }
+
             })
             .disposed(by: disposeBag)
 

@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import Hero
 
 class MovieDetailViewController: UIViewController, MenuViewControllerProtocol {
 
@@ -21,13 +22,28 @@ class MovieDetailViewController: UIViewController, MenuViewControllerProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(onTap)))
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(onTap))
+        swipe.direction = .down
+        
+        view.addGestureRecognizer(swipe)
     }
 
     private func setupUI() {
         if let url = self.viewModel.movieUrl {
             bannerImageView.setImage(withURL: url)
         }
+        self.bannerImageView.hero.isEnabled = true
         self.bannerTitle.text = self.viewModel.movie.title
         self.bannerDescription.text = self.viewModel.movie.overview
     }
+
+    @objc func back() {
+        dismiss(animated: true, completion: nil)
+    }
+
+    @objc func onTap() {
+        back() // default action is back on tap
+    }
+    
 }

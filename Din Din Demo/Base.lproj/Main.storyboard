@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Hlp-hn-9lv">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
+                                <rect key="frame" x="25" y="0.0" width="364" height="500"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="500" id="7x5-pN-Mc6"/>
@@ -49,9 +49,9 @@
                         <constraints>
                             <constraint firstItem="Hlp-hn-9lv" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Er4-pF-h13"/>
                             <constraint firstItem="TH3-MR-qwa" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Jkd-uC-TWQ"/>
-                            <constraint firstItem="Hlp-hn-9lv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="MW1-jS-3d8"/>
+                            <constraint firstItem="Hlp-hn-9lv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="MW1-jS-3d8"/>
                             <constraint firstAttribute="height" secondItem="wye-gY-JJ4" secondAttribute="height" id="NMZ-gM-irm"/>
-                            <constraint firstItem="Hlp-hn-9lv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="PhK-DB-jn1"/>
+                            <constraint firstItem="Hlp-hn-9lv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-25" id="PhK-DB-jn1"/>
                             <constraint firstItem="wye-gY-JJ4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="646" id="VKp-W8-QLU"/>
                             <constraint firstItem="wye-gY-JJ4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ruq-Xk-cmX"/>
                             <constraint firstItem="TH3-MR-qwa" firstAttribute="bottom" secondItem="Hlp-hn-9lv" secondAttribute="bottom" constant="-30" id="wt6-kT-Csz"/>

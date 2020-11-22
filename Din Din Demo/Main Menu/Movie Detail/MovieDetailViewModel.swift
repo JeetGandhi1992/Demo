@@ -17,8 +17,10 @@ protocol MovieDetailType {
 
 class MovieDetailViewModel: MovieDetailType {
     var movieUrl: URL? {
-        let imgUrlStr1 = movie.posterPath ?? ""
-        return URL(string: Constants.BaseImgURL + imgUrlStr1)
+        if let imgUrlStr1 = movie.posterPath {
+            return URL(string: Constants.BaseImgURL + imgUrlStr1)
+        }
+        return nil
     }
 
     let movie: Movie

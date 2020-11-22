@@ -9,11 +9,11 @@ target 'Din Din Demo' do
     pod 'RxDataSources'           
     pod 'RxGesture'              
     pod 'RxOptional'            
-    pod 'RxRealm'              
 
     pod 'Moya/RxSwift'           
     pod 'ObjectMapper'
     pod 'AlamofireImage'
+    pod 'Hero'
 
   # Pods for Din Din Demo
 

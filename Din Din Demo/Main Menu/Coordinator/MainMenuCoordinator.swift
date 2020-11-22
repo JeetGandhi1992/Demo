@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import Hero
 
 class MainMenuCoordinator {
 
@@ -31,7 +32,18 @@ class MainMenuCoordinator {
         viewModel.selectedMovie
             .asDriver(onErrorJustReturn: Movie())
             .drive(onNext: { [weak viewController] (movie) in
-                viewController?.present(getMovieDetail(for: movie), animated: true, completion: nil)
+                let cardHeroId = "\(movie.id ?? 0)"
+                weak var detailsViewController = getMovieDetail(for: movie) as? MovieDetailViewController
+                detailsViewController?.hero.isEnabled = true
+//                detailsViewController?.view.hero.isEnabledForSubviews = true
+                detailsViewController?.hero.modalAnimationType = .zoom
+
+                detailsViewController?.view.hero.id = cardHeroId
+                detailsViewController?.view.hero.modifiers = [.useScaleBasedSizeChange]
+
+                viewController?.present(detailsViewController!, animated: true, completion: {
+                    detailsViewController?.hero.modalAnimationType = .autoReverse(presenting: .zoom)
+                })
             })
             .disposed(by: viewModel.disposeBag)
         return viewController

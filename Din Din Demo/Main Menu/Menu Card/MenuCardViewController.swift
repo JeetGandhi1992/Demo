@@ -101,7 +101,7 @@ extension MenuCardViewController {
                                      for: indexPath) as? DiscountCollectionViewCell else {
             return UICollectionViewCell()
         }
-
+        cell.bannerImageView.contentMode = .scaleAspectFill
         cell.configure(movie: discountCellModel.movie)
         return cell
     }

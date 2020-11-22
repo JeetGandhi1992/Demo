@@ -27,8 +27,11 @@ public protocol MenuNetworkingViewController: MenuViewControllerProtocol where S
 extension MenuNetworkingViewController {
 
     public func setupLoadingSpinner() {
-        let height = (UIScreen.main.bounds.height/2) - 23
-        let width = (UIScreen.main.bounds.width/2) - 23
+        let screenFrame = UIScreen.main.bounds
+        let screenHeight = screenFrame.height
+        let screenWidth = screenFrame.width
+        let height = (screenHeight/2) - 23
+        let width = (screenWidth/2) - 23
         self.loadingSpinner.frame = CGRect(x: width, y: height, width: 46, height: 46)
         self.view.addSubview(self.loadingSpinner)
     }

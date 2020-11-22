@@ -8,6 +8,7 @@
 import UIKit
 import Alamofire
 import AlamofireImage
+import Hero
 
 class DiscountCollectionViewCell: UICollectionViewCell {
 
@@ -15,6 +16,7 @@ class DiscountCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.bannerImageView.hero.isEnabled = true
         // Initialization code
     }
 
@@ -23,8 +25,7 @@ class DiscountCollectionViewCell: UICollectionViewCell {
     }
 
     public func configure(movie: Movie) {
-        let imgUrlStr1 = movie.posterPath ?? ""
-        if let url = URL(string: Constants.BaseImgURL + imgUrlStr1) {
+        if let imgUrlStr1 = movie.posterPath, let url = URL(string: Constants.BaseImgURL + imgUrlStr1) {
             bannerImageView.setImage(withURL: url)
         }
     }
